@@ -14,6 +14,7 @@ namespace TheMovies.ViewModels
 	public class HomeViewModel : BaseViewModel
     {
         private readonly IMoviesService _moviesService;
+        private readonly ICrashService _crashService;
 
         private ObservableCollection<Grouping<string, MovieModel>> _moviesCollection;
 
@@ -23,20 +24,15 @@ namespace TheMovies.ViewModels
             set => SetProperty(ref _moviesCollection, value);
         }
 
-        public HomeViewModel(IMoviesService moviesService)
+        public HomeViewModel(IMoviesService moviesService, ICrashService crashService)
 		{
 			_moviesService = moviesService;
+            _crashService = crashService;
 		}
 
-        public ICommand MovieDetailsCommand => new Xamarin.Forms.Command<MovieModel>(OpenDetails, (movie) => IsNotBusy);
+        public ICommand MovieDetailsCommand => new Command<MovieModel>(OpenDetails, (movie) => IsNotBusy);
 
         public ICommand RefreshCommand => new Command(() => GetMovies());
-
-        private void OpenDetails(MovieModel movie)
-        {
-            var popup = new MovieDetailPopup(movie);
-            App.Current.MainPage.Navigation.ShowPopup(popup);
-        }
 
         public override async Task InitializeAsync(object parameter = null)
         {
@@ -45,6 +41,21 @@ namespace TheMovies.ViewModels
             GetMovies();
         }
 
+        #region Private Methods
+
+        /// <summary>
+        /// Open Details Popup 
+        /// </summary>
+        /// <param name="movie"></param>
+        private void OpenDetails(MovieModel movie)
+        {
+            var popup = new MovieDetailPopup(movie);
+            App.Current.MainPage.Navigation.ShowPopup(popup);
+        }
+
+        /// <summary>
+        /// Get Movies async
+        /// </summary>
         private async void GetMovies()
         {
             IsBusy = true;
@@ -61,12 +72,15 @@ namespace TheMovies.ViewModels
             }
             catch (Exception ex)
             {
-
+                // Handle the Exception
+                _crashService.TrackError(ex);
             }
             finally
             {
                 IsBusy = false;
             }
         }
+
+        #endregion
     }
 }

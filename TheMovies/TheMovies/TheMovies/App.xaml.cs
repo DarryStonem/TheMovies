@@ -36,6 +36,10 @@ namespace TheMovies
             MainPage = new HomeView();
         }
 
+        /// <summary>
+        /// PreLoad the ViewModels
+        /// </summary>
+        /// <param name="container"></param>
         private void PreLoadViewModels(IContainer container)
         {
             HomeViewModel = container.Resolve<HomeViewModel>();
@@ -52,18 +56,6 @@ namespace TheMovies
                     AppConfiguration = JsonConvert.DeserializeObject<Configuration>(configJson);
                 }
             }
-        }
-
-        protected override void OnStart ()
-        {
-        }
-
-        protected override void OnSleep ()
-        {
-        }
-
-        protected override void OnResume ()
-        {
         }
 
         public static HomeViewModel HomeViewModel { get; private set; }

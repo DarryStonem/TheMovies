@@ -8,7 +8,7 @@
     x:Name="Page"
     x:Class="TheMovies.Views.HomeView">
     <ContentPage.Content>
-        <RefreshView RefreshColor="White" IsRefreshing="{Binding IsBusy}" Command="{Binding RefreshCommand}">
+        <RefreshView Margin="16,0" RefreshColor="White" IsRefreshing="{Binding IsBusy}" Command="{Binding RefreshCommand}">
             <CollectionView ItemsSource="{Binding MoviesCollection}">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Vertical" />

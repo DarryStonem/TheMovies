@@ -14,6 +14,11 @@ namespace TheMovies.Views
             BindingContext = movie;
         }
 
+        /// <summary>
+        /// Dismiss the Popup
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BackButtonEvent(Object sender, System.EventArgs e)
         {
             Dismiss(null);

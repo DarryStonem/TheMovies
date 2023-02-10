@@ -16,12 +16,18 @@ namespace TheMovies.Services
             _networkService = networkService;
 		}
 
+        #region Public Methods
+
+        /// <summary>
+        /// Get the List of Movies
+        /// </summary>
+        /// <returns>List of Movies</returns>
         public async Task<List<MovieModel>> GetMoviesAsync()
         {
             var url = $"{App.AppConfiguration.ApiBaseUrl}/3/discover/movie?api_key={App.AppConfiguration.ApiKey}&sort_by=popularity.desc";
             var movies = await _networkService.GetApiAsync<MoviesResponseModel>(url, new CancellationToken());
 
-            if(!movies.Results.Any())
+            if (!movies.Results.Any())
             {
                 return null;
             }
@@ -30,6 +36,8 @@ namespace TheMovies.Services
                 return movies.Results;
             }
         }
+
+        #endregion
     }
 }
 

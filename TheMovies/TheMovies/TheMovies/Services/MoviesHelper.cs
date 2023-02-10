@@ -28,6 +28,11 @@ namespace TheMovies.Services
             { 37, "Western" }
         };
 
+        /// <summary>
+        /// Map a list of IDs with the Movie Genre
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
         public static List<string> MapMovieGenres(List<int> ids)
         {
             List<string> genres = new List<string>();

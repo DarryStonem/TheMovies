@@ -10,6 +10,13 @@ namespace TheMovies.Services
 {
 	public class NetworkService : INetworkService
 	{
+        /// <summary>
+        /// GET from REST with HttpClient
+        /// </summary>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="uri">URL for the Api Call</param>
+        /// <param name="token">Cancellation Token</param>
+        /// <returns></returns>
         public async Task<TResult> GetApiAsync<TResult>(string uri, CancellationToken token = new CancellationToken())
         {
             HttpClient httpClient = new HttpClient();
