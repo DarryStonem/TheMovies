@@ -1,0 +1,45 @@
+﻿<xct:Popup xmlns="http://xamarin.com/schemas/2014/forms"
+           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+           xmlns:local="clr-namespace:TheMovies.Views"
+           xmlns:xct="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit"
+           Size="{x:Static local:PopupHelper.Large}"
+           x:Class="TheMovies.Views.MovieDetailPopup">
+    <ScrollView>
+        <Grid RowDefinitions="Auto,*, Auto">
+            <Frame HasShadow="False"
+                   IsClippedToBounds="True"
+                   Padding="0"
+                   Margin="16"
+                   HorizontalOptions="Center"
+                   CornerRadius="16">
+                <Image Source="{Binding PosterImage}" Aspect="AspectFit"/>
+            </Frame>
+            <StackLayout Margin="16,0" Grid.Row="1">
+                <Label Text="{Binding OriginalTitle}" FontSize="Title" />
+                <StackLayout Orientation="Horizontal">
+                    <Label FontSize="Medium"
+                           TextColor="#A5A5A5"
+                           Text="Released: "/>
+                    <Label FontSize="Medium" Text="{Binding ReleaseDate}"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label FontSize="Small"
+                           TextColor="#7107CC"
+                           Text="{Binding VoteCount}"/>
+                    <Label FontSize="Small"
+                           TextColor="#7107CC"
+                           Text=" ratings"/>
+                </StackLayout>
+                <Label Text="{Binding Overview}"/>
+            </StackLayout>
+            <Grid Margin="16" Grid.Row="2" ColumnDefinitions="5*,5*">
+                <Button Text="Back" Clicked="BackButtonEvent"/>
+                <Button Grid.Column="1"
+                        CornerRadius="16"
+                        BackgroundColor="#7107CC"
+                        TextColor="White"
+                        Text="View Trailer"/>
+            </Grid>
+        </Grid>
+    </ScrollView>
+</xct:Popup>
