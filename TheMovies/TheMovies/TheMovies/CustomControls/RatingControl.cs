@@ -71,10 +71,8 @@ namespace TheMovies.CustomControls
         private void UpdateStars()
         {
             var stack = GetMainControl();
-            double newMinValue = 1;
-            double newMaxValue = 5;
 
-            double scaledValue = Rating / 10 * (newMaxValue - newMinValue) + newMinValue;
+            double scaledValue = Rating / 2;
 
             double rating = Math.Round(scaledValue * 2, MidpointRounding.AwayFromZero) / 2;
 
