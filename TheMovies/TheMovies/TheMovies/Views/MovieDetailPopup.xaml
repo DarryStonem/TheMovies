@@ -3,6 +3,8 @@
            xmlns:local="clr-namespace:TheMovies.Views"
            xmlns:xct="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit"
            Size="{x:Static local:PopupHelper.Large}"
+           xmlns:customControls="clr-namespace:TheMovies.CustomControls"
+           Color="{StaticResource PopupBackgroundColor}"
            x:Class="TheMovies.Views.MovieDetailPopup">
     <ScrollView>
         <Grid RowDefinitions="Auto,*, Auto">
@@ -10,19 +12,22 @@
                    IsClippedToBounds="True"
                    Padding="0"
                    Margin="16"
-                   HorizontalOptions="Center"
+                   HorizontalOptions="FillAndExpand"
                    CornerRadius="16">
-                <Image Source="{Binding PosterImage}" Aspect="AspectFit"/>
+                <Image HorizontalOptions="FillAndExpand" Source="{Binding PosterImageLarge}" HeightRequest="534" Aspect="AspectFill"/>
             </Frame>
             <StackLayout Margin="16,0" Grid.Row="1">
-                <Label Text="{Binding OriginalTitle}" FontSize="Title" />
-                <StackLayout Orientation="Horizontal">
-                    <Label FontSize="Medium"
+                <Label Text="{Binding OriginalTitle}" FontAttributes="Bold" TextColor="White" FontSize="28" />
+                <StackLayout Spacing="0" Orientation="Horizontal">
+                    <Label FontSize="16"
                            TextColor="#A5A5A5"
                            Text="Released: "/>
-                    <Label FontSize="Medium" Text="{Binding ReleaseDate}"/>
+                    <Label FontSize="16" FontAttributes="Bold" TextColor="White" Text="{Binding ReleaseDateShort}"/>
                 </StackLayout>
-                <StackLayout Orientation="Horizontal">
+                <StackLayout>
+                    <customControls:RatingControl HeightRequest="35" Rating="{Binding VoteAverage}"/>
+                </StackLayout>
+                <StackLayout Spacing="0" Orientation="Horizontal">
                     <Label FontSize="Small"
                            TextColor="#7107CC"
                            Text="{Binding VoteCount}"/>
@@ -30,14 +35,21 @@
                            TextColor="#7107CC"
                            Text=" ratings"/>
                 </StackLayout>
-                <Label Text="{Binding Overview}"/>
+                <Label Text="{Binding Overview}" TextColor="White" FontSize="14"/>
             </StackLayout>
             <Grid Margin="16" Grid.Row="2" ColumnDefinitions="5*,5*">
-                <Button Text="Back" Clicked="BackButtonEvent"/>
+                <Button Text="Back"
+                        CornerRadius="16"
+                        BorderColor="#7107CC"
+                        BorderWidth="3"
+                        FontAttributes="Bold"
+                        TextColor="White"
+                        Clicked="BackButtonEvent"/>
                 <Button Grid.Column="1"
                         CornerRadius="16"
                         BackgroundColor="#7107CC"
                         TextColor="White"
+                        FontAttributes="Bold"
                         Text="View Trailer"/>
             </Grid>
         </Grid>

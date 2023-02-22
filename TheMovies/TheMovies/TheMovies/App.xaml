@@ -4,5 +4,23 @@
              x:Class="TheMovies.App">
     <Application.Resources>
 
+        <!-- Colors -->
+        <Color x:Key="NavigationBarColor">#1A1A1A</Color>
+        <Color x:Key="PrimaryColor">#7107CC</Color>
+        <Color x:Key="LightPrimaryColor">#974BF0</Color>
+
+        <Color x:Key="PopupBackgroundColor">#1A1A1A</Color>
+
+        <Style TargetType="NavigationPage">
+            <Setter Property="BarBackgroundColor" Value="{StaticResource NavigationBarColor}"/>
+            <Setter Property="BarTextColor" Value="White" />
+        </Style>
+
+        <Style TargetType="Label" x:Key="TitleBarLabelStyle">
+            <Setter Property="FontSize" Value="28"/>
+            <Setter Property="CharacterSpacing" Value="0"/>
+            <Setter Property="FontAttributes" Value="Bold, Italic"/>
+            <Setter Property="FontFamily" Value="Rift"/>
+        </Style>
     </Application.Resources>
 </Application>

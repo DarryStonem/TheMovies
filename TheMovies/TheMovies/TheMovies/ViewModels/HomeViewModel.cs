@@ -34,6 +34,8 @@ namespace TheMovies.ViewModels
 
         public ICommand RefreshCommand => new Command(() => GetMovies());
 
+        public ICommand NavigateToSearchCommand => new Command(() => App.Current.MainPage.Navigation.PushAsync(new SearchPage()));
+
         public override async Task InitializeAsync(object parameter = null)
         {
             await base.InitializeAsync(parameter);
@@ -73,7 +75,7 @@ namespace TheMovies.ViewModels
             catch (Exception ex)
             {
                 // Handle the Exception
-                _crashService.TrackError(ex);
+                _crashService.TrackError(ex, nameof(HomeViewModel));
             }
             finally
             {

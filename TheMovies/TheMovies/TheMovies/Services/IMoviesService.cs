@@ -8,9 +8,11 @@ namespace TheMovies.Services
 	public interface IMoviesService
 	{
         /// <summary>
-        /// Get the List of Movies
+        /// Get the Popular List of Movies
         /// </summary>
         /// <returns>List of Movies</returns>
         Task<List<MovieModel>> GetMoviesAsync();
+
+        Task<List<MovieModel>> GetMoviesAsync(string title);
     }
 }

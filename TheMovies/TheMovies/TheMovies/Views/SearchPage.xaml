@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    xmlns:customControls="clr-namespace:TheMovies.CustomControls"
+    x:Class="TheMovies.Views.SearchPage"
+    x:Name="Page"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    BackgroundColor="#000000"
+    ios:Page.UseSafeArea="true">
+    <NavigationPage.TitleView>
+        <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <StackLayout
+                Orientation="Horizontal"
+                HorizontalOptions="CenterAndExpand"
+                Spacing="0"
+                VerticalOptions="Center">
+                <Label
+                    Text="MOVIE"
+                    Style="{StaticResource TitleBarLabelStyle}"
+                    TextColor="{StaticResource LightPrimaryColor}" />
+                <Label
+                    Text="TIME"
+                    Style="{StaticResource TitleBarLabelStyle}"
+                    TextColor="{StaticResource PrimaryColor}" />
+            </StackLayout>
+        </Grid>
+    </NavigationPage.TitleView>
+    <ContentPage.Content>
+        <Grid RowDefinitions="Auto, *">
+            <Entry Margin="12" ClearButtonVisibility="WhileEditing" Placeholder="Search">
+                <Entry.Behaviors>
+                    <xct:UserStoppedTypingBehavior 
+                        Command="{Binding SearchQueryCommand}"
+                        StoppedTypingTimeThreshold="1000"
+                        MinimumLengthThreshold="3"
+                        ShouldDismissKeyboardAutomatically="True" />
+                </Entry.Behaviors>
+            </Entry>
+            <CollectionView Grid.Row="1" ItemsSource="{Binding MoviesCollection}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="25" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BackgroundColor="Transparent">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer CommandParameter="{Binding}"
+                                                      Command="{Binding BindingContext.MovieDetailsCommand, Source={x:Reference Page}}"/>
+                            </Frame.GestureRecognizers>
+                            <StackLayout Spacing="20"
+                                         Orientation="Horizontal">
+                                <Frame BorderColor="{StaticResource PrimaryColor}"
+                                       IsClippedToBounds="True"
+                                       Padding="0"
+                                       Margin="0"
+                                       CornerRadius="16">
+                                    <ffimageloading:CachedImage Source="{Binding PosterImage, Mode=TwoWay}"
+                                                                Aspect="AspectFill"/>
+                                </Frame>
+                                <StackLayout VerticalOptions="Center">
+                                    <Label Text="{Binding OriginalTitle}" FontAttributes="Bold" TextColor="White" FontSize="20" />
+                                    <Label Text="{Binding GenresString}" FontSize="16" TextColor="#A5A5A5" />
+                                    <customControls:RatingControl HeightRequest="35" Rating="{Binding VoteAverage}"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
+

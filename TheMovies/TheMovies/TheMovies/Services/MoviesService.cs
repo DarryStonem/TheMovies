@@ -37,6 +37,25 @@ namespace TheMovies.Services
             }
         }
 
+        /// <summary>
+        /// Get the List of Movies
+        /// </summary>
+        /// <returns>List of Movies</returns>
+        public async Task<List<MovieModel>> GetMoviesAsync(string title)
+        {
+            var url = $"{App.AppConfiguration.ApiBaseUrl}/3/search/movie?api_key={App.AppConfiguration.ApiKey}&sort_by=popularity.desc&language=en-US&include_adult=false&query={title}";
+            var movies = await _networkService.GetApiAsync<MoviesResponseModel>(url, new CancellationToken());
+
+            if (!movies.Results.Any())
+            {
+                return null;
+            }
+            else
+            {
+                return movies.Results;
+            }
+        }
+
         #endregion
     }
 }

@@ -3,44 +3,70 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     BackgroundColor="#000000"
     ios:Page.UseSafeArea="true"
     x:Name="Page"
     x:Class="TheMovies.Views.HomeView">
+    <NavigationPage.TitleView>
+        <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <StackLayout
+                Orientation="Horizontal"
+                HorizontalOptions="CenterAndExpand"
+                Spacing="0"
+                VerticalOptions="Center">
+                <Label
+                    Text="MOVIE"
+                    Style="{StaticResource TitleBarLabelStyle}"
+                    TextColor="{StaticResource LightPrimaryColor}" />
+                <Label
+                    Text="TIME"
+                    Style="{StaticResource TitleBarLabelStyle}"
+                    TextColor="{StaticResource PrimaryColor}" />
+            </StackLayout>
+            <Image HorizontalOptions="End" HeightRequest="45" Source="{xct:ImageResource Id=TheMovies.Resources.Icons.search.png}">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NavigateToSearchCommand}"/>
+                </Image.GestureRecognizers>
+            </Image>
+        </Grid>
+    </NavigationPage.TitleView>
     <ContentPage.Content>
         <RefreshView Margin="16,0" RefreshColor="White" IsRefreshing="{Binding IsBusy}" Command="{Binding RefreshCommand}">
             <CollectionView ItemsSource="{Binding MoviesCollection}">
                 <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Vertical" />
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="25" />
                 </CollectionView.ItemsLayout>
-                <CollectionView.GroupHeaderTemplate>
-                    <DataTemplate>
-                        <Grid Padding="10">
-                            <Label Text="{Binding Key}" TextColor="White" FontAttributes="Bold"/>
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.GroupHeaderTemplate>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Grid RowDefinitions="Auto, 250">
+                        <Grid RowDefinitions="Auto, 252">
                             <Grid Padding="10">
                                 <Label Text="{Binding Key}" TextColor="White" FontAttributes="Bold"/>
                             </Grid>
-                            <CollectionView Grid.Row="1" ItemsSource="{Binding}">
-                                <CollectionView.ItemsLayout>
-                                    <LinearItemsLayout ItemSpacing="25" Orientation="Horizontal"/>
-                                </CollectionView.ItemsLayout>
-                                <CollectionView.ItemTemplate>
-                                    <DataTemplate>
-                                        <Frame IsClippedToBounds="True" Padding="0" Margin="0" CornerRadius="16">
-                                            <Frame.GestureRecognizers>
-                                                <TapGestureRecognizer CommandParameter="{Binding}" Command="{Binding BindingContext.MovieDetailsCommand, Source={x:Reference Page}}"/>
-                                            </Frame.GestureRecognizers>
-                                            <Image Source="{Binding PosterImage}" Aspect="AspectFill"/>
-                                        </Frame>
-                                    </DataTemplate>
-                                </CollectionView.ItemTemplate>
-                            </CollectionView>
+                            <ScrollView Grid.Row="1" Orientation="Horizontal">
+                                <StackLayout BindableLayout.ItemsSource="{Binding }"
+                                             Spacing="20"
+                                             Orientation="Horizontal">
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate>
+                                            <Frame BorderColor="{StaticResource PrimaryColor}"
+                                                   IsClippedToBounds="True"
+                                                   Padding="0"
+                                                   Margin="0"
+                                                   CornerRadius="16">
+                                                <Frame.GestureRecognizers>
+                                                    <TapGestureRecognizer CommandParameter="{Binding}"
+                                                                          Command="{Binding BindingContext.MovieDetailsCommand, Source={x:Reference Page}}"/>
+                                                </Frame.GestureRecognizers>
+                                                <ffimageloading:CachedImage Source="{Binding PosterImage, Mode=TwoWay}"
+                                                                            WidthRequest="150"
+                                                                            Aspect="AspectFill"/>
+                                            </Frame>
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </StackLayout>
+                            </ScrollView>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

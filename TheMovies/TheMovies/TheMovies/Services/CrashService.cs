@@ -8,7 +8,7 @@ namespace TheMovies.Services
         /// </summary>
         /// <param name="ex"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void TrackError(Exception ex)
+        public void TrackError(Exception ex, string viewModel)
         {
 
         }

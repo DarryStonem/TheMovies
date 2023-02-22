@@ -46,5 +46,17 @@ namespace TheMovies.Services
 
             return genres;
         }
+
+        /// <summary>
+        /// Map a list of IDs with the Movie Genre
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public static string MapMovieGenresToString(List<int> ids)
+        {
+            var list = MapMovieGenres(ids);
+
+            return String.Join(", ", list.ToArray());
+        }
     }
 }

@@ -33,7 +33,7 @@ namespace TheMovies
 
             PreLoadViewModels(Container);
 
-            MainPage = new HomeView();
+            MainPage = new NavigationPage(new HomeView());
         }
 
         /// <summary>

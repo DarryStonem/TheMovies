@@ -12,10 +12,12 @@
 
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2545" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.7.4" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.5" />
     <PackageReference Include="Autofac" Version="6.5.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
     <PackageReference Include="Xamarin.CommunityToolkit" Version="2.0.5" />
+    <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
+    <PackageReference Include="Xamarin.FFImageLoading" Version="2.4.11.982" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Models\" />
@@ -26,14 +28,32 @@
     <None Remove="Newtonsoft.Json" />
     <None Remove="config.json" />
     <None Remove="Xamarin.CommunityToolkit" />
+    <None Remove="Resources\" />
+    <None Remove="Resources\Fonts\" />
+    <None Remove="Resources\Fonts\Fort Foundry - Rift-Regular.otf" />
+    <None Remove="Resources\Icons\" />
+    <None Remove="Resources\Icons\search.png" />
+    <None Remove="CustomControls\" />
+    <None Remove="Resources\Icons\star-rating.png" />
+    <None Remove="Resources\Icons\star-empty.png" />
+    <None Remove="Resources\Icons\star-half.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="ViewModels\" />
     <Folder Include="Views\" />
     <Folder Include="Services\" />
+    <Folder Include="Resources\" />
+    <Folder Include="Resources\Fonts\" />
+    <Folder Include="Resources\Icons\" />
+    <Folder Include="CustomControls\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="config.json" />
+    <EmbeddedResource Include="Resources\Fonts\Fort Foundry - Rift-Regular.otf" />
+    <EmbeddedResource Include="Resources\Icons\search.png" />
+    <EmbeddedResource Include="Resources\Icons\star-rating.png" />
+    <EmbeddedResource Include="Resources\Icons\star-empty.png" />
+    <EmbeddedResource Include="Resources\Icons\star-half.png" />
   </ItemGroup>
 </Project>

@@ -50,8 +50,18 @@ namespace TheMovies.Models
         public int VoteCount { get; set; }
 
         [JsonIgnore]
-        public string PosterImage => $"https://image.tmdb.org/t/p/w780{PosterPath}";
+        public string PosterImage => $"https://image.tmdb.org/t/p/w342{PosterPath}";
 
+        [JsonIgnore]
+        public string PosterImageLarge => $"https://image.tmdb.org/t/p/w780{PosterPath}";
+
+        [JsonIgnore]
+        public string ReleaseDateShort => DateTime.Parse(ReleaseDate).ToString("MM/dd/yy");
+
+        [JsonIgnore]
         public List<string> Genres => MoviesHelper.MapMovieGenres(GenreIds);
+
+        [JsonIgnore]
+        public string GenresString => MoviesHelper.MapMovieGenresToString(GenreIds);
     }
 }
